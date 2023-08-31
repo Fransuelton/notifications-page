@@ -28,7 +28,7 @@ const NotificationArea = () => {
               <UserName>{data.userName}</UserName>{" "}
 
               {data.action && <span>{data.action}</span>}{" "}
-              
+
               <ReactedNotification>
                 {data.message && <span>{data.message}</span>}
                 {data.group && (
@@ -40,13 +40,6 @@ const NotificationArea = () => {
 
             <NotificationTime>{data.timeAgo}</NotificationTime>
 
-            {data.photo && (
-              <ChesseImg
-                src={data.photo}
-                alt="Foto de uma menina jogando xadrez"
-              />
-            )}
-
             {data.privateMessage && (
               <PrivateMessage>
                 Hello, thanks for setting up the Chess Club. I’ve been a member
@@ -55,6 +48,12 @@ const NotificationArea = () => {
               </PrivateMessage>
             )}
           </Info>
+          {data.photo && (
+              <ChesseImg
+                src={data.photo}
+                alt="Foto de uma menina jogando xadrez"
+              />
+            )}
         </Section>
       ))}
     </NotificationsList>
