@@ -4,10 +4,9 @@
 
 <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Fransuelton/notifications-page?color=%2304D361">
 <img alt="Repository size" src="https://img.shields.io/github/repo-size/Fransuelton/notifications-page">
-<a href="https://github.com/Fransuelton/notifications-page/main">
 <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Fransuelton/notifications-page">
-</a><a href="https://github.com/Fransuelton/notifications-page/stargazers">
-</a><img alt="Status in development" src="https://img.shields.io/badge/Status-in%20development-green">
+<img alt="Status done" src="https://img.shields.io/badge/Status-Finalized%20-greensky">
+
 </p>
 
 ## 💻 About the project
