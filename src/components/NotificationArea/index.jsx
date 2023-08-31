@@ -1,14 +1,7 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { HeaderArea } from "../HeaderArea";
-import AvatarMax from "../../assets/images/avatar-mark-webber.webp";
-import AvatarAngela from "../../assets/images/avatar-angela-gray.webp";
-import AvatarJacob from "../../assets/images/avatar-jacob-thompson.webp";
-import AvatarRizky from "../../assets/images/avatar-rizky-hasanuddin.webp";
-import AvatarKimberly from "../../assets/images/avatar-kimberly-smith.webp";
-import AvatarNathan from "../../assets/images/avatar-nathan-peterson.webp";
-import AvatarAnna from "../../assets/images/avatar-anna-kim.webp";
-import ChessePhoto from "../../assets/images/image-chess.webp";
+import notificationData from "../../data/notificationsData";
 
 const NotificationArea = () => {
   const [unreadVisible, setUnreadVisible] = useState(true);
@@ -25,100 +18,45 @@ const NotificationArea = () => {
         handleUnreadClick={handleUnreadClick}
         messageCount={messageCount}
       />
-      <Section>
-        <Img src={AvatarMax} alt="Foto de Perfil" />
-        <Info>
-          <Description>
-            <UserName>Mark Webberr</UserName> reacted to your recent post{" "}
-            <ReactedNotification>
-              My first tournament today!
-              {unreadVisible && <Unread />}
-            </ReactedNotification>
-          </Description>
 
-          <NotificationTime>1m ago</NotificationTime>
-        </Info>
-      </Section>
+      {notificationData.map((data, index) => (
+        <Section key={index}>
+          <Img src={data.avatar} alt="Foto de Perfil" />
 
-      <Section>
-        <Img src={AvatarAngela} alt="Foto de Perfil" />
-        <Info>
-          <Description>
-            <UserName>Angela Gray</UserName> followed you
-            {unreadVisible && <Unread />}
-          </Description>
+          <Info>
+            <Description>
+              <UserName>{data.userName}</UserName>{" "}
 
-          <NotificationTime>5m ago</NotificationTime>
-        </Info>
-      </Section>
+              {data.action && <span>{data.action}</span>}{" "}
+              
+              <ReactedNotification>
+                {data.message && <span>{data.message}</span>}
+                {data.group && (
+                  <GroupNotification>{data.group}</GroupNotification>
+                )}
+                {data.isUnread && unreadVisible && <Unread />}
+              </ReactedNotification>
+            </Description>
 
-      <Section>
-        <Img src={AvatarJacob} alt="Foto de Perfil" />
-        <Info>
-          <Description>
-            <UserName>Jacob Thompson</UserName> has joined your group{" "}
-            <GroupNotification>Chess Club</GroupNotification>
-            {unreadVisible && <Unread />}
-          </Description>
+            <NotificationTime>{data.timeAgo}</NotificationTime>
 
-          <NotificationTime>1 day ago</NotificationTime>
-        </Info>
-      </Section>
+            {data.photo && (
+              <ChesseImg
+                src={data.photo}
+                alt="Foto de uma menina jogando xadrez"
+              />
+            )}
 
-      <Section>
-        <Img src={AvatarRizky} alt="Foto de Perfil" />
-        <Info>
-          <Description>
-            <UserName>Rizky Hasanuddin</UserName> sent you a private message
-          </Description>
-
-          <NotificationTime>5 days ago</NotificationTime>
-
-          <PrivateMessage>
-            Hello, thanks for setting up the Chess Club. I’ve been a member for
-            a few weeks now and I’m already having lots of fun and improving my
-            game.
-          </PrivateMessage>
-        </Info>
-      </Section>
-
-      <Section>
-        <Img src={AvatarKimberly} alt="Foto de Perfil" />
-        <Info>
-          <Description>
-            <UserName>Kimberly Smith</UserName> commented on your picture
-          </Description>
-
-          <NotificationTime>1 week ago</NotificationTime>
-        </Info>
-        <ChesseImg src={ChessePhoto} alt="Foto de uma menina jogando xadrez" />
-      </Section>
-
-      <Section>
-        <Img src={AvatarNathan} alt="Foto de Perfil" />
-        <Info>
-          <Description>
-            <UserName>Nathan Peterson</UserName> reacted to your recent post{" "}
-            <ReactedNotification>
-              5 end-game strategies to increase your win rate
-            </ReactedNotification>
-          </Description>
-
-          <NotificationTime>2 weeks ago</NotificationTime>
-        </Info>
-      </Section>
-
-      <Section>
-        <Img src={AvatarAnna} alt="Foto de Perfil" />
-        <Info>
-          <Description>
-            <UserName>Anna Kim</UserName> left the group{" "}
-            <GroupNotification>Chess Club</GroupNotification>
-          </Description>
-
-          <NotificationTime>2 weeks ago</NotificationTime>
-        </Info>
-      </Section>
+            {data.privateMessage && (
+              <PrivateMessage>
+                Hello, thanks for setting up the Chess Club. I’ve been a member
+                for a few weeks now and I’m already having lots of fun and
+                improving my game.
+              </PrivateMessage>
+            )}
+          </Info>
+        </Section>
+      ))}
     </NotificationsList>
   );
 };
@@ -141,10 +79,10 @@ const Section = styled.section`
 `;
 
 const Info = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items-center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items-center;
 `;
 
 const Img = styled.img`
